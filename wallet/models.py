@@ -22,6 +22,7 @@ class Customer(models.Model):
     employment_status=models.BooleanField(default= False)
     
 
+
 class Wallets (models.Model):
     balance=models.IntegerField(blank=True) 
     customer=models.OneToOneField(Customer,on_delete=   models.CASCADE  )

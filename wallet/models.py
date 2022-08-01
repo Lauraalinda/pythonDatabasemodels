@@ -1,8 +1,4 @@
-from datetime import datetime
-from email import message
-from email.policy import EmailPolicy
-from platform import mac_ver
-from statistics import mode
+from datetime import date, datetime
 from django.db import models
 
 # Create your models here.
@@ -19,81 +15,77 @@ class Customer(models.Model):
     profile_picture=models.ImageField(default= False)
     marital_status=models.CharField(max_length=15, blank =True)
     signature=models.ImageField(default= False)
-    employment_status=models.BooleanField(default= False)
-    
+    employment_status=models.CharField(max_length=20,default= False)
 
-
-class Wallets (models.Model):
+class Wallet (models.Model):
     balance=models.IntegerField(blank=True) 
-    customer=models.OneToOneField(Customer,on_delete=   models.CASCADE  )
-    pin=models.SmallIntegerField(max_length=8,blank=True)
-    # currency=models.ForeignKey(max_length=15,blank=True)
+    customer=models.OneToOneField(Customer,on_delete= models.CASCADE)
+    pin=models.SmallIntegerField(blank=True)
+    currency=models.CharField(max_length=10,blank=True)
     active=models.BooleanField()
     datecreated=models.DateTimeField()
-    type=models.CharField(max_length=10)
 
-# class Account(models.Model):
-    # account_type=models.CharField()
-    # account_name=models.CharField()
-    # savings=models.IntegerField()
-    # wallet=models.ForeignKey()
+class Currency(models.Model):
+    Symbol=models.CharField(max_length=10,blank=True)
+    name=models.CharField(max_length=15,blank=True)
+    country=models.CharField(max_length=15,blank=True)
     
+class Account(models.Model):
+    account_type=models.CharField(max_length=20,blank=True)
+    account_name=models.ForeignKey(Customer,on_delete=models.CASCADE)
+    wallet=models.ForeignKey(Wallet,on_delete= models.CASCADE)
+    
+class Third_Party(models.Model):
+    full_name=models.CharField(max_length=20,blank=True)
+    email=models.EmailField()
+    phone_number=models.CharField(max_length=20,blank=True)
+    transaction_cost=models.IntegerField(blank=True)
+    currency=models.CharField(max_length=20)
+    account=models.ForeignKey(Account,on_delete=models.CASCADE)
+    status=models.BooleanField()
 
+class Transaction(models.Model):
+    transaction_type=models.CharField(max_length=15,blank=True)
+    account_origin=models.ForeignKey(Account, on_delete=models.CASCADE,blank=True)
+    third_party=models.ForeignKey(Third_Party,on_delete= models.CASCADE)
+    datetime=models.DateTimeField()
+    status=models.BooleanField()
 
-# class Transaction(models.Model):
-    # transaction_type=models.CharField(max_length=15)
-    # account_origin=models.ForeignKey()
-    # destination=models.ForeignKey()
-    # third_party=models.ForeignKey()
-    # datetime=models.ForeignKey()
-    # reciept=models.CharField()
-    # status=models.CharField()
+class Card(models.Model):
+    date_issued=models.DateTimeField(blank=True)
+    card_status=models.BooleanField()
+    security_code=models.PositiveSmallIntegerField(blank=True)
+    signature=models.ImageField()
+    issuer=models.CharField(max_length=20)
+    account=models.ForeignKey(Account,models.CASCADE,blank=True)
 
-# class Card(models.Model):
-    # date_issued=models.DateTimeField()
-    # card_status=models.CharField(max_length=10)
-    # security_code=models.PositiveSmallIntegerField()
-    # signature=models.ImageField()
-    # issuer=models.CharField()
-    # account=models.ForeignKey()
-# 
-# class Third_Party(models.Model):
-    # full_name=models.CharField()
-    # email=models.EmailField()
-    # phone_number=models.CharField()
-    # transaction_cost=models.IntegerField()
-    # currency=models.ForeignKey()
-    # account=models.ForeignKey()
-    # status=models.BooleanField(max_length=8)
+class Receipt(models.Model):
+    date=models.DateTimeField(blank=True)
+    transaction=models.ForeignKey(Transaction,on_delete=models.CASCADE,blank=True)
+    receipt_file=models.FileField(blank=True)
 
-# class Notifications(models.Model):
-    # datecreated=models.DateField()
-    # message=models.CharField(max_length=40)
-    # receipt=models.ForeignKey(max_length=40)
-    # status=models.ForeignKey(max_length=8)
-    # image=models.ImageField()
-# 
-# class Reciept(models.Model):
-    # date=models.DateTimeField()
-    # transaction=models.ForeignKey()
-    # reciept_file=models.FileField()
-# 
-# class Loan_model(models.Model):
-    # loan_type=models.CharField(max_length=15) 
-    # amount=models.IntegerField()
-    # wallet=models.ForeignKey()
-    # datetime=models.DateField()
-    # loan_terms=models.CharField(max_length=120)
-    # payment_due_date=models.DateField()
-    # guaranter=models.CharField(max_length=20)
-    # balance=models.IntegerField()
-    # duration=models.CharField(max_length=15)
-    # interest_rate=models.IntegerField()
-    # balance=models.IntegerField()
-    # status=models.ForeignKey(max_length=8)
-# 
-# class Reward(models.Model):
-    # wallet=models.ForeignKey()
-    # points=models.IntegerField()
-    # date=models.IntegerField()
-    # transaction=models.ForeignKey()
+class Notification(models.Model):
+    datecreated=models.DateField(blank=True)
+    message=models.CharField(max_length=40,blank=True)
+    status=models.BooleanField()
+    image=models.ImageField()
+
+class Loan_model(models.Model):
+    loan_type=models.CharField(max_length=15,blank=True) 
+    amount=models.IntegerField(blank=True)
+    wallet=models.ForeignKey(Wallet,on_delete=models.CASCADE)
+    datetime=models.DateTimeField()
+    loan_terms=models.CharField(max_length=120,blank=True)
+    payment_due_date=models.DateField()
+    guaranter=models.CharField(max_length=20,blank=True)
+    balance=models.IntegerField()
+    duration=models.CharField(max_length=15,default=True)
+    interest_rate=models.IntegerField()
+    balance=models.IntegerField()
+    status=models.BooleanField(default=True)
+
+class Reward(models.Model):
+    wallet=models.ForeignKey(Wallet,on_delete=models.CASCADE)
+    points=models.IntegerField()
+    date=models.DateTimeField(auto_now_add=True)
+    transaction=models.ForeignKey(Transaction,on_delete=models.CASCADE)

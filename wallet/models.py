@@ -26,7 +26,7 @@ class Wallet (models.Model):
     datecreated=models.DateTimeField()
 
 class Currency(models.Model):
-    Symbol=models.CharField(max_length=10,blank=True)
+    symbol=models.CharField(max_length=10,blank=True)
     name=models.CharField(max_length=15,blank=True)
     country=models.CharField(max_length=15,blank=True)
     
@@ -46,7 +46,8 @@ class Third_Party(models.Model):
 
 class Transaction(models.Model):
     transaction_type=models.CharField(max_length=15,blank=True)
-    account_origin=models.ForeignKey(Account, on_delete=models.CASCADE,blank=True)
+    account_origin=models.ForeignKey(Account, related_name='account_destination',on_delete=models.CASCADE,null=True, blank=True)
+    account_destination=models.ForeignKey(Account, related_name='account_origin',on_delete=models.CASCADE,null=True, blank=True)
     third_party=models.ForeignKey(Third_Party,on_delete= models.CASCADE)
     datetime=models.DateTimeField()
     status=models.BooleanField()
@@ -70,7 +71,7 @@ class Notification(models.Model):
     status=models.BooleanField()
     image=models.ImageField()
 
-class Loan_model(models.Model):
+class Loan(models.Model):
     loan_type=models.CharField(max_length=15,blank=True) 
     amount=models.IntegerField(blank=True)
     wallet=models.ForeignKey(Wallet,on_delete=models.CASCADE)

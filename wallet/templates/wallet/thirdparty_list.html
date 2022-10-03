@@ -1,0 +1,27 @@
+<table>
+    <th>
+      <td>Full_Name</td>
+      <td>Email</td>
+      <td>Phone_number</td>
+      <td>Transaction_cost</td>
+      <td>Currency</td>
+      <td>Account</td>
+      <td>Status</td>
+      <td>View profile</td>
+      <td>Edit customer</td>
+    </th>
+{% for third_party in third_parties %}
+<tr>
+    <td>{{third_party.full_name}}</td>
+    <td>{{third_party.email}}</td>
+    <td>{{third_party.phone_number}}</td>
+    <td>{{third_party.transaction_cost}}</td>
+    <td>{{third_party.currency}}</td>
+    <td>{{third_party.account}}</td>
+    <td>{{third_party.status}}</td>
+
+<td><a href ="{% url 'customer_profile' id=third_party.id %}">ViewProfile</a></td>
+<td><a href ="{% url 'edit_customer' id=third_party.id %}">EditCustomer</a></td>
+</tr>
+{%endfor%}
+</table>

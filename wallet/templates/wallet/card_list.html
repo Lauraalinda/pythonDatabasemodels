@@ -1,0 +1,26 @@
+<table>
+    <th>
+      <td>Date_issued</td>
+      <td>Card_status</td>
+      <td>Security_code</td>
+      <td>Signature</td>
+      <td>Issuer</td>
+      <td>Account</td>
+      <td>View profile</td>
+      <td>Edit customer</td>
+      
+    </th>
+   
+{% for card in cards%}
+<tr>
+    <td>{{card.date_issued}}</td>
+    <td>{{card.card_status}}</td>
+    <td>{{card.security_code}}</td>
+    <td>{{card.signature}}</td>
+    <td>{{card.issuer}}</td>
+    <td>{{card.account}}</td>
+    <td><a href ="{% url 'customer_profile' id=card.id %}">ViewProfile</a></td>
+    <td><a href ="{% url 'edit_customer' id=card.id %}">EditCustomer</a></td>
+</tr>
+{%endfor%}
+</table>

@@ -1,3 +1,7 @@
+{% load static %}
+
+<html lang="en">
+
 <h2>Customer Registration</h2>
 <form method="POST" class="registration_form">{% csrf_token %}
     {{form.as_p}}

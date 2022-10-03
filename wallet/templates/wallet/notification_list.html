@@ -1,0 +1,18 @@
+<table>
+    <th>
+      <td>First Name</td>
+      <td>Email</td>
+      <td>Age</td>
+      <td>View profile</td>
+      <td>Edit customer</td>
+    </th>
+{% for notification  in  notifications%}
+<tr>
+    <td>{{notification.first_name}}</td>
+    <td>{{notification.email}}</td>
+    <td>{{notification.age}}</td>
+    <td><a href ="{% url 'customer_profile' id=notification.id %}">ViewProfile</a></td>
+    <td><a href ="{% url 'edit_customer' id=notification.id %}">EditCustomer</a></td>
+</tr>
+{%endfor%}
+</table>

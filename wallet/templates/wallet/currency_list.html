@@ -1,0 +1,18 @@
+<table>
+    <th>
+      <td>Symbol</td>
+      <td>Name</td>
+      <td>Country</td>
+      <td>View profile</td>
+      <td>Edit customer</td>
+    </th>
+{% for currency  in  currencies%}
+<tr>
+    <td>{{currency.symbol}}</td>
+    <td>{{currency.name}}</td>
+    <td>{{currency.country}}</td>
+    <td><a href ="{% url 'customer_profile' id=currency.id %}">ViewProfile</a></td>
+    <td><a href ="{% url 'edit_customer' id=currency.id %}">EditCustomer</a></td>
+</tr>
+{%endfor%}
+</table>

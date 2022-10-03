@@ -10,6 +10,19 @@ from .views import register_receiptdetails
 from .views import register_notificationdetails
 from .views import register_loandetails
 from .views import register_rewarddetails
+from .views import list_customers
+from .views import list_walletdetails
+from .views import list_currency
+from .views import list_accounts
+from .views import list_third_parties
+from .views import list_transactions
+from .views import list_cards
+from .views import list_receipts
+from .views import list_notifications
+from .views import list_rewards
+from .views import list_loans
+from .views import customer_profile
+from .views import edit_customer
 
 
 urlpatterns = [
@@ -23,8 +36,20 @@ urlpatterns = [
     path("receiptdetails/",register_receiptdetails, name="registration"),
     path("notificationdetails/",register_notificationdetails, name="registration"),
     path("loandetails/",register_loandetails, name="registration"),
-    path("rewarddetails/",register_rewarddetails, name="registration")
-
+    path("rewarddetails/",register_rewarddetails, name="registration"),
+    path("list/",list_customers, name ="list_customers"),
+    path("listwallet/",list_walletdetails, name ="list_walletdetails"),
+    path("listcurrency/",list_currency, name ="list_currency"),
+    path("listaccount/",list_accounts, name ="list_accounts"),
+    path("listthirdparty/",list_third_parties, name ="list_third_parties"),
+    path("listtransaction/",list_transactions, name ="list_transactions"),
+    path("listcard/",list_cards, name ="list_cards"),
+    path("listreceipts/",list_receipts, name ="list_receipts"),
+    path("listnotification/",list_notifications, name ="list_notifications"),
+    path("listreward/",list_rewards, name ="list_rewards"),
+    path("listloan/",list_loans, name ="list_loans"),
+    path("customers/<int:id>/",customer_profile, name ="customer_profile"),
+    path("customers/edit/<int:id>/",edit_customer, name ="edit_customer"),
 
     
 ]

@@ -9,7 +9,8 @@
     <td>{{receipt.date}}</td>
     <td>{{receipt.transaction}}</td>
     <td>{{receipt.receipt_file}}</td>
-    
+    <td><a href ="{% url 'receipt_profile' id=receipt.id %}">ViewReceiptProfile</a></td>
+    <td><a href ="{% url 'edit_receipt' id=receipt.id %}">Editreceipt</a></td>
     
 </tr>
 {%endfor%}

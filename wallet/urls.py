@@ -22,8 +22,9 @@ from .views import list_notifications
 from .views import list_rewards
 from .views import list_loans
 from .views import customer_profile
+from .views import wallet_profile
 from .views import edit_customer
-
+from .views import edit_wallet
 
 urlpatterns = [
     path("register/",register_customer, name="registration"),
@@ -49,8 +50,10 @@ urlpatterns = [
     path("listreward/",list_rewards, name ="list_rewards"),
     path("listloan/",list_loans, name ="list_loans"),
     path("customers/<int:id>/",customer_profile, name ="customer_profile"),
+    path("wallet/<int:id>/",wallet_profile, name ="wallet_profile"),
     path("customers/edit/<int:id>/",edit_customer, name ="edit_customer"),
-
+    path("wallet/edit/<int:id>/",edit_wallet, name ="edit_wallet"),
+     
     
 ]
 

@@ -7,7 +7,7 @@
       <td>Active</td>
       <td>Datecreated</td>
       <td>View profile</td>
-      <td>Edit customer</td>
+      <td>Edit wallet</td>
     </th>
 {% for wallet in wallets %}
 <tr>
@@ -17,8 +17,8 @@
     <td>{{wallet.currency}}</td>
     <td>{{wallet.active}}</td>
     <td>{{wallet.datecreated}}</td>
-    <td><a href ="{% url 'customer_profile' id=wallet.id %}">ViewProfile</a></td>
-    <td><a href ="{% url 'edit_customer' id=wallet.id %}">EditCustomer</a></td>
+    <td><a href ="{% url 'wallet_profile' id=wallet.id %}">ViewProfile</a></td>
+    <td><a href ="{% url 'edit_wallet' id=wallet.id %}">EditWalletDetails</a></td>
 </tr>
 {%endfor%}
 </table>

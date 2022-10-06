@@ -182,5 +182,22 @@ def edit_customer(request,id):
            
      else :
         form = CustomerRegistrationForm(instance=customer) 
-        return render(request, "wallet/edit_profile.html", {"form": form})
+        return render(request, "wallet/edit_customer.html", {"form": form})
+
+def  wallet_profile(request, id): 
+     wallet= Wallet.objects.get(id = id)
+     return render ( request, "wallet/wallet_profile.html", {"wallet":wallet})
+
+def  edit_wallet(request,id): 
+     wallet= Wallet.objects.get(id = id)
+     if request.method =="POST":
+        form = WalletDetailsForm(request.POST, instance=wallet)
+        form.is_valid()
+        form.save()
+        return redirect("wallet_profile", id=wallet.id)
+           
+     else :
+        form = WalletDetailsForm(instance=wallet) 
+        return render(request, "wallet/edit_wallet.html", {"form": form})
+           
            

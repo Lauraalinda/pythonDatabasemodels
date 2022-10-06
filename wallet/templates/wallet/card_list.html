@@ -6,8 +6,8 @@
       <td>Signature</td>
       <td>Issuer</td>
       <td>Account</td>
-      <td>View profile</td>
-      <td>Edit customer</td>
+      <td>View Cardprofile</td>
+      <td>EditCardDetails</td>
       
     </th>
    
@@ -19,8 +19,8 @@
     <td>{{card.signature}}</td>
     <td>{{card.issuer}}</td>
     <td>{{card.account}}</td>
-    <td><a href ="{% url 'customer_profile' id=card.id %}">ViewProfile</a></td>
-    <td><a href ="{% url 'edit_customer' id=card.id %}">EditCustomer</a></td>
+    <td><a href ="{% url 'card_profile' id=card.id %}">ViewCardProfile</a></td>
+    <td><a href ="{% url 'edit_card' id=card.id %}">EditCard</a></td>
 </tr>
 {%endfor%}
 </table>

@@ -20,8 +20,8 @@
     <td>{{third_party.account}}</td>
     <td>{{third_party.status}}</td>
 
-<td><a href ="{% url 'customer_profile' id=third_party.id %}">ViewProfile</a></td>
-<td><a href ="{% url 'edit_customer' id=third_party.id %}">EditCustomer</a></td>
+<td><a href ="{% url 'thirdparty_profile' id=third_party.id %}">ViewThirdpartyProfile</a></td>
+<td><a href ="{% url 'edit_thirdparty' id=third_party.id %}">EditThirdParty</a></td>
 </tr>
 {%endfor%}
 </table>

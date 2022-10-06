@@ -3,8 +3,8 @@
       <td>First Name</td>
       <td>Email</td>
       <td>Age</td>
-      <td>View profile</td>
-      <td>Edit customer</td>
+      <td>ViewLoanprofile</td>
+      <td>EditLoanDetails</td>
       
     </th>
 
@@ -13,8 +13,8 @@
     <td>{{loan.first_name}}</td>
     <td>{{loan.email}}</td>
     <td>{{loan.age}}</td>
-    <td><a href ="{% url 'customer_profile' id=loan.id %}">ViewProfile</a></td>
-    <td><a href ="{% url 'edit_customer' id=loan.id %}">EditCustomer</a></td>
+    <td><a href ="{% url 'loan_profile' id=loan.id %}">ViewLoanprofile</a></td>
+    <td><a href ="{% url 'edit_loan' id=loan.id %}">EditLoanDetails</a></td>
 </tr>
 {%endfor%}
 </table>

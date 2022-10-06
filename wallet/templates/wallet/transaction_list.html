@@ -18,8 +18,8 @@
     <td>{{transaction.third_party}}</td>
     <td>{{transaction.datetime}}</td>
     <td>{{transaction.status}}</td>
-    <td><a href ="{% url 'customer_profile' id=transaction.id %}">ViewProfile</a></td>
-    <td><a href ="{% url 'edit_customer' id=transaction.id %}">EditCustomer</a></td>
+    <td><a href ="{% url 'transaction_profile' id=transaction.id %}">ViewTransactionProfile</a></td>
+    <td><a href ="{% url 'edit_transaction' id=transaction.id %}">EditCustomerTransaction</a></td>
 </tr>
 {%endfor%}
 </table>

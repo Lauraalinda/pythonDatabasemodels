@@ -199,5 +199,76 @@ def  edit_wallet(request,id):
      else :
         form = WalletDetailsForm(instance=wallet) 
         return render(request, "wallet/edit_wallet.html", {"form": form})
+
+def  account_profile(request, id): 
+     account= Account.objects.get(id = id)
+     return render (request, "account/account_profile.html", {"account":account})
+
+def  edit_account(request,id): 
+     account= Account.objects.get(id = id)
+     if request.method =="POST":
+        form = AccountDetailsForm(request.POST, instance=account)
+        form.is_valid()
+        form.save()
+        return redirect("account_profile", id=account.id)
            
+     else :
+        form = AccountDetailsForm(instance=account) 
+        return render(request, "account/edit_account.html", {"form": form})
+
+def  thirdparty_profile(request, id): 
+     account= Account.objects.get(id = id)
+     return render (request, "account/account_profile.html", {"account":account})
+
+def  edit_thirdparty(request,id): 
+     third_Party= Third_Party.objects.get(id = id)
+     if request.method =="POST":
+        form = Third_PartyDetailsForm(request.POST, instance=account)
+        form.is_valid()
+        form.save()
+        return redirect("thirdparty_profile", id=account.id)
            
+     else :
+        form = Third_PartyDetailsForm(instance=account) 
+        return render(request, "thirdparty/edit_thirdparty.html", {"form": form})
+          
+           
+def  currency_profile(request, id): 
+     currency= Currency.objects.get(id = id)
+     return render (request, "currency/currency_profile.html", {"currency":currency})
+
+def  edit_currency(request,id): 
+     currency= Currency.objects.get(id = id)
+     if request.method =="POST":
+        form = CurrencyDetailsForm(request.POST, instance=currency)
+        form.is_valid()
+        form.save()
+        return redirect("currency_profile", id=currency.id)
+           
+     else :
+        form = CurrencyDetailsForm(instance=account) 
+        return render(request, "currency/edit_currency.html", {"form": form})
+
+def  currency_transaction(request, id): 
+     transaction= Transaction.objects.get(id = id)
+     return render (request, " transaction/transaction_profile.html", {"transaction": transaction})
+
+def  edit_transaction(request,id): 
+     transaction= Transaction.objects.get(id = id)
+     if request.method =="POST":
+        form = TransactionDetailsForm(request.POST, instance=transaction)
+        form.is_valid()
+        form.save()
+        return redirect("transaction_profile", id=transaction.id)
+           
+     else :
+        form = TransactionDetailsForm(instance=transaction) 
+        return render(request, "transaction/edit_transaction.html", {"form": form})
+          
+          
+
+
+
+
+
+

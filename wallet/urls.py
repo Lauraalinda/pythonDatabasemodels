@@ -23,8 +23,18 @@ from .views import list_rewards
 from .views import list_loans
 from .views import customer_profile
 from .views import wallet_profile
+from .views import account_profile
 from .views import edit_customer
 from .views import edit_wallet
+from .views import edit_thirdparty
+from .views import edit_account
+from .views import edit_currency
+from .views import edit_transaction
+# from .views import edit_card
+# from .views import edit_receipt
+# from .views import edit_loan
+# from .views import edit_notification
+# from .views import edit_reward
 
 urlpatterns = [
     path("register/",register_customer, name="registration"),
@@ -53,7 +63,15 @@ urlpatterns = [
     path("wallet/<int:id>/",wallet_profile, name ="wallet_profile"),
     path("customers/edit/<int:id>/",edit_customer, name ="edit_customer"),
     path("wallet/edit/<int:id>/",edit_wallet, name ="edit_wallet"),
-     
+    path("account/edit/<int:id>/",edit_account, name ="edit_account"),
+    path("thirdparty/edit/<int:id>/",edit_thirdparty, name ="edit_thirdparty"),
+    path("currency/edit/<int:id>/",edit_currency, name ="edit_currency"),
+    path("transaction/edit/<int:id>/",edit_transaction, name ="edit_transaction"),
+    # path("card/edit/<int:id>/",edit_card, name ="edit_card"),
+    # path("receipt/edit/<int:id>/",edit_receipt, name ="edit_receipt"),
+    # path("loan/edit/<int:id>/",edit_loan, name ="edit_loan"),
+    # path("notification/edit/<int:id>/",edit_notification, name ="edit_notification"),
+    # path("reward/edit/<int:id>/",edit_reward, name ="edit_reward"),
     
 ]
 

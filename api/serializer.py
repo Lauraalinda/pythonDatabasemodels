@@ -55,7 +55,7 @@ class ReceiptSerializer(serializers.ModelSerializer):
 class AccountSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Account
-        fields =("account_type","account_name","wallet")
+        fields =("account_id","account_type","account_balance","account_name","wallet")
 
 class NotificationSerializer(serializers.ModelSerializer):
     class Meta: 

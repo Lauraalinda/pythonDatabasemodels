@@ -15,7 +15,7 @@ class CurrencyAdmin(admin.ModelAdmin):
     search_fields=("customer",)
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display=("account_type","account_name","wallet",)
+    list_display=("account_type","account_name","wallet","account_id","account_balance")
     search_fields=("customer",)
 
 class Third_PartyAdmin(admin.ModelAdmin):

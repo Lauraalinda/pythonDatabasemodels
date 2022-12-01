@@ -36,6 +36,8 @@ from .views import edit_transaction
 # from .views import edit_notification
 # from .views import edit_reward
 
+
+
 urlpatterns = [
     path("register/",register_customer, name="registration"),
     path("walletdetails/",register_walletdetails, name="registration"),
@@ -72,6 +74,8 @@ urlpatterns = [
     # path("loan/edit/<int:id>/",edit_loan, name ="edit_loan"),
     # path("notification/edit/<int:id>/",edit_notification, name ="edit_notification"),
     # path("reward/edit/<int:id>/",edit_reward, name ="edit_reward"),
+   
+   
     
 ]
 

@@ -10,6 +10,10 @@ from wallet.models import Receipt
 from wallet.models import Notification
 from wallet.models import Loan
 from wallet.models import Reward 
+from rest_framework import views
+from rest_framework.response import Response
+from django.core.exceptions import ObjectDoesNotExist
+
 from .serializer import CustomerSerializer
 from .serializer import WalletSerializer
 from .serializer import CurrencySerializer
@@ -67,3 +71,73 @@ class LoanViewSet (viewsets.ModelViewSet):
 class RewardViewSet (viewsets.ModelViewSet):
     queryset =Reward.objects.all()
     serializer_class=RewardSerializer
+
+class AccountDepositView(views.APIView):
+    def post(self, request, format=None):       
+        account_id = request.data["account_id"]
+        amount = request.data["amount"]
+        try:
+            account = Account.objects.get(id=account_id)
+        except ObjectDoesNotExist:
+            return Response("Account Not Found", status=404)
+    
+        message, status = account.deposit(amount)
+        return Response(message, status=status)
+        
+class AccountTransferView(views.APIView):
+    def post(self, request, format=None):       
+        account_id = request.data["account_id"]
+        amount = request.data["amount"]
+        try:
+            account = Account.objects.get(id=account_id)
+        except ObjectDoesNotExist:
+            return Response("Account Not Found", status=404)
+       
+        message, status = account.transfer(amount)
+        return Response(message, status=status)
+
+class AccountWithdrawView(views.APIView):
+    def post(self, request, format=None):
+        account_id = request.data["account_id"]
+        amount = request.data["amount"]
+        try:
+            account = Account.objects.get(id = account_id)
+        except ObjectDoesNotExist:
+            return Response("Account Not Found", status=404)
+
+        message, status = account.withdraw(amount)
+        return Response(message, status=status)
+
+class AccountRequest_loanView(views.APIView):
+    def post(self, request, format=None):
+        account_id = request.data["account_id"]
+        amount = request.data["amount"]
+        try:
+            account = Account.objects.get(id = account_id)
+        except ObjectDoesNotExist:
+            return Response("Account Not Found", status=404)
+        message, status = account.request_loan(amount)
+        return Response(message, status=status)
+
+class AccountRepay_loanView(views.APIView):
+    def post(self, request, format=None):
+        account_id = request.data["account_id"]
+        amount = request.data["amount"]
+        try:
+            account = Account.objects.get(id = account_id)
+        except ObjectDoesNotExist:
+            return Response("Account Not Found", status=404)
+        message, status = account.request_loan(amount)
+        return Response(message, status=status)
+
+
+class  AccountBuyAirtimeView(views.APIView):
+    def post(self, request, format=None):
+        account_id = request.data["account_id"]
+        amount = request.data["amount"]
+        try:
+            account = Account.objects.get(id = account_id)
+        except ObjectDoesNotExist:
+            return Response("Account Not Found", status=404)
+        message, status = account.buy_airtime((amount)
+        return Response(message, status=status)

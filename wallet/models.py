@@ -31,10 +31,96 @@ class Currency(models.Model):
     country=models.CharField(max_length=15,blank=True)
     
 class Account(models.Model):
+    account_id = models.IntegerField(null=True)
+    account_balance =models.IntegerField(null=True) 
     account_type=models.CharField(max_length=20,blank=True)
     account_name=models.ForeignKey(Customer,on_delete=models.CASCADE)
     wallet=models.ForeignKey(Wallet,on_delete= models.CASCADE)
+    def deposit(self, amount):
+       if amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+       else:
+           self.account_balance += amount
+           self.save()
+           message = f"You have deposited {amount}, your new balance is {self.account_balance}"
+           status = 200
+       return message, status
     
+    
+    def transfer(self, destination, amount):
+       if amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+      
+       elif amount < self.account_balance:
+           message =  "Insufficient balance"
+           status = 403
+      
+       else:
+           self.account_balance -= amount
+           self.save()
+           destination.deposit(amount)
+          
+           message = f"You have transfered {amount}, your new balance is {self.account_balance}"
+           status = 200
+       return message, status
+
+    def withdraw(self,amount):
+       if  amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+       elif amount < self.account_balance:
+           message =  "Insufficient balance"
+           status = 403
+       else:
+           self.account_balance -= amount
+           self.save()
+           
+           message = f"You have withdrawn {amount}, your new balance is {self.account_balance}"
+           status = 200
+       return message, status
+
+
+    def request_loan(self,amount):
+        if amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+        else:
+           newaccount_balance=self.account_balance += amount
+           loan_balance=amount
+           self.save()
+           message = f"You have borrowed {amount}, your new balance is {self.account_balance}"
+           status = 200
+        return message, status
+
+    def repay_loan(self,amount):
+        if amount <= 0:
+           message =  "Invalid amount"
+           status = 403
+        elif amount <= loan_balance:
+           loan_balance-=amount
+        else:   
+           overpayment=amount-loan_balance
+           self.account_balance+=overpayment
+           loan_balance=0
+           message = f"You have paid {amount}, your new balance is {self.account_balance}"
+           status = 200
+        
+        return message, status
+
+    def buy_airtime(self,amount):
+        if amount < self.account_balance:
+            message =  "Insufficient balance"
+            status = 403
+        else:
+            self.account_balance -= amount
+            self.save()
+    
+            message = f"You have bought  {amount}, worth of airtime, your new balance is {self.account_balance}"
+            status = 200
+        return message, status
+
 class Third_Party(models.Model):
     full_name=models.CharField(max_length=20,blank=True)
     email=models.EmailField()

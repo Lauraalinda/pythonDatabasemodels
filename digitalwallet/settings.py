@@ -41,8 +41,6 @@ INSTALLED_APPS = [
     'wallet',
     'rest_framework',
     'bootstrap5',
-
-   
 ]
 
 MIDDLEWARE = [
